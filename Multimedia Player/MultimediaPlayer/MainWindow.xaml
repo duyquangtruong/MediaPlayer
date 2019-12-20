@@ -19,12 +19,14 @@
         <Slider Name="timeSlider" Grid.Row="1" VerticalAlignment="center" Margin="20,0,20,0" Opacity="0.7"/>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="8*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Name="controlButton" Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center">
+            <StackPanel Name="controlButton" Orientation="Horizontal" Grid.Column="1" 
+                        VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Button Name="btnBack" Background="Black" BorderThickness="0"
-                        Width="35" Height="35" Margin="40,0,5,0">
+                        Width="35" Height="35" Margin="0,0,5,0">
                     <Image Source="Images/backward.png"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
@@ -39,18 +41,18 @@
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
             </StackPanel>
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="2" HorizontalAlignment="Right">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="8*"/>
                 </Grid.ColumnDefinitions>
                 <Button Name="btnVolume" Grid.Column="0" Background="Black"
-                        BorderThickness="0" Height="20" Width="20" RenderTransformOrigin="2,0.583">
+                        BorderThickness="0" Height="20" Width="20" Margin="0,0,10,0">
                     <Image Name="imgVolume" Source="Images/speaker.png"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 <Slider Name="sliderVolume" Grid.Column="1" VerticalAlignment="Center"
-                        Margin="0,0,20,0" Opacity="0.7" Background="{x:Null}"/>
+                        Margin="0,0,20,0" Opacity="0.7" MaxWidth="100" MinWidth="100"/>
             </Grid>
         </Grid>
     </Grid>
