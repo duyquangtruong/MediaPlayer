@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MultimediaPlayer"
-        mc:Ignorable="d" Icon="Images/icon.png"
+        mc:Ignorable="d" Icon="Images/icon1.png"
         Title="Ultra Media" Height="600" Width="800" MinHeight="500" MinWidth="600">
     <Window.Resources>
         <!-- This style is used for buttons, to remove the WPF default 'animated' mouse over effect -->
