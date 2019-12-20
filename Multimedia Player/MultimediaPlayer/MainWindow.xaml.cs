@@ -25,5 +25,75 @@ namespace MultimediaPlayer
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
         }
+
+        private void btnPlayList_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnPlayList.Tag.ToString() == "0")
+            {
+                var img = new BitmapImage(
+                new Uri("Images/playlist.png",
+                UriKind.Relative));
+                imgPlaylist.Source = img;
+                btnPlayList.Tag = "1";
+            }
+            else
+            {
+                var img = new BitmapImage(
+                new Uri("Images/playlistoff.png",
+                UriKind.Relative));
+                imgPlaylist.Source = img;
+                btnPlayList.Tag = "0";
+            }            
+        }
+
+        private void btnRepeat_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnRepeat.Tag.ToString() == "0")
+            {
+                var img = new BitmapImage(
+                new Uri("Images/repeat.png", UriKind.Relative));
+                imgRepeat.Source = img;
+                btnRepeat.Tag = "1";
+            }
+            else 
+            {
+                if (btnRepeat.Tag.ToString() == "1")
+                {
+                    var img = new BitmapImage(
+                    new Uri("Images/repeatone.png", UriKind.Relative));
+                    imgRepeat.Source = img;
+                    btnRepeat.Tag = "2";
+                }
+                else 
+                {
+                    var img = new BitmapImage(
+                    new Uri("Images/repeatoff.png", UriKind.Relative));
+                    imgRepeat.Source = img;
+                    btnRepeat.Tag = "0";
+                }
+            }
+        }
+
+        private void btnShuffle_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnShuffle.Tag.ToString() == "0")
+            {
+                var img = new BitmapImage(
+                new Uri("Images/shuffle.png",
+                UriKind.Relative));
+                imgShuffle.Source = img;
+                btnShuffle.Tag = "1";
+            }
+            else
+            {
+                var img = new BitmapImage(
+                new Uri("Images/shuffleoff.png",
+                UriKind.Relative));
+                imgShuffle.Source = img;
+                btnShuffle.Tag = "0";
+            }
+        }
+
+
     }
 }
