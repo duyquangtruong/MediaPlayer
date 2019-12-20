@@ -1,0 +1,57 @@
+﻿<Window x:Class="MultimediaPlayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MultimediaPlayer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800" MinHeight="500" MinWidth="400">
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <MediaElement Name="mediaPlayer" Grid.Row="0" Margin="30"/>
+        <Slider Name="timeSlider" Grid.Row="1" VerticalAlignment="center" Margin="20,0,20,0" Opacity="0.7"/>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Name="controlButton" Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center">
+                <Button Name="btnBack" Background="Black" BorderThickness="0"
+                        Width="35" Height="35" Margin="40,0,5,0">
+                    <Image Source="Images/backward.png"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Button>
+                <Button Name="btnPlay" Background="Black" BorderThickness="0"
+                        Width="50" Height="50" Margin="0,0,5,0">
+                    <Image Source="Images/play.png"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Button>
+                <Button Name="btnForward" Background="Black" BorderThickness="0"
+                        Width="35" Height="35">
+                    <Image Source="Images/forward.png"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Button>
+            </StackPanel>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="8*"/>
+                </Grid.ColumnDefinitions>
+                <Button Name="btnVolume" Grid.Column="0" Background="Black"
+                        BorderThickness="0" Height="20" Width="20" RenderTransformOrigin="2,0.583">
+                    <Image Name="imgVolume" Source="Images/speaker.png"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Button>
+                <Slider Name="sliderVolume" Grid.Column="1" VerticalAlignment="Center"
+                        Margin="0,0,20,0" Opacity="0.7" Background="{x:Null}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
