@@ -75,7 +75,7 @@
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 <Button Name="btnStop" Background="Black" BorderThickness="0"
-                        Height="20" Width="20" Margin="10,0,0,0" 
+                        Height="30" Width="30" Margin="10,0,0,0" 
                         Style="{StaticResource NoHoverButton}">
                     <Image Name="imgStop" Source="Images/stop.png"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
