@@ -115,5 +115,25 @@ namespace MultimediaPlayer
                 sliderVolume.Value = 7;
             }
         }
+
+        private void btnPlay_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnPlay.Tag.ToString() == "0")
+            {
+                var img = new BitmapImage(
+                new Uri("Images/pause.png",
+                UriKind.Relative));
+                imgPlay.Source = img;
+                btnPlay.Tag = "1";
+            }
+            else 
+            {
+                var img = new BitmapImage(
+                new Uri("Images/play.png",
+                UriKind.Relative));
+                imgPlay.Source = img;
+                btnPlay.Tag = "0";
+            }
+        }
     }
 }
