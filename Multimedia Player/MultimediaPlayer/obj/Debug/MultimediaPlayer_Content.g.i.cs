@@ -8,11 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/backward.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/forward.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/mute.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/pause.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/play.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/speaker.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/playlist.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/playlistoff.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/repeat.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/repeatoff.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/repeatone.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/shuffle.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/shuffleoff.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/stop.png")]
 
 

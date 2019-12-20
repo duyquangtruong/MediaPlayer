@@ -102,5 +102,15 @@
     <Resource Include="Images\play.png" />
     <Resource Include="Images\speaker.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\playlist.png" />
+    <Resource Include="Images\playlistoff.png" />
+    <Resource Include="Images\repeat.png" />
+    <Resource Include="Images\repeatoff.png" />
+    <Resource Include="Images\repeatone.png" />
+    <Resource Include="Images\shuffle.png" />
+    <Resource Include="Images\shuffleoff.png" />
+    <Resource Include="Images\stop.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

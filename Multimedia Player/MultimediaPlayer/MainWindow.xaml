@@ -16,15 +16,39 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <MediaElement Name="mediaPlayer" Grid.Row="0" Margin="30"/>
-        <Slider Name="timeSlider" Grid.Row="1" VerticalAlignment="center" Margin="20,0,20,0" Opacity="0.7"/>
+        <Slider Name="timeSlider" Grid.Row="1" VerticalAlignment="center" Margin="20,0,20,0" Opacity="0.5"/>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Name="controlButton" Orientation="Horizontal" Grid.Column="1" 
+            <Button Name="btnPlayList" Background="Black" BorderThickness="0"
+                        Height="30" Width="30" Grid.Column="0">
+                <Image Name="imgPlaylist" Source="Images/playlistoff.png"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
+            </Button>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">                
+                <Button Name="btnRepeat" Background="Black" BorderThickness="0"
+                        Height="20" Width="20" Margin="0,0,10,0">
+                    <Image Name="imgRepeat" Source="Images/repeatoff.png"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Button>
+                <Button Name="btnShuffle" Background="Black" BorderThickness="0"
+                        Height="20" Width="20">
+                    <Image Name="imgShuffle" Source="Images/shuffleoff.png"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Button>
+                <Button Name="btnStop" Background="Black" BorderThickness="0"
+                        Height="20" Width="20" Margin="10,0,0,0" >
+                    <Image Name="imgStop" Source="Images/stop.png"
+                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Button>
+            </StackPanel>
+            <StackPanel Name="controlButton" Orientation="Horizontal" Grid.Column="2" 
                         VerticalAlignment="Center" HorizontalAlignment="Center">
+                
                 <Button Name="btnBack" Background="Black" BorderThickness="0"
                         Width="35" Height="35" Margin="0,0,5,0">
                     <Image Source="Images/backward.png"
@@ -41,7 +65,7 @@
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
             </StackPanel>
-            <Grid Grid.Column="2" HorizontalAlignment="Right">
+            <Grid Grid.Column="3" HorizontalAlignment="Left">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="8*"/>
@@ -52,7 +76,8 @@
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 <Slider Name="sliderVolume" Grid.Column="1" VerticalAlignment="Center"
-                        Margin="0,0,20,0" Opacity="0.7" MaxWidth="100" MinWidth="100"/>
+                        Margin="0,0,20,0" Opacity="0.5" MaxWidth="100" MinWidth="100"
+                        Value="100"/>
             </Grid>
         </Grid>
     </Grid>
