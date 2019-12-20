@@ -94,6 +94,26 @@ namespace MultimediaPlayer
             }
         }
 
-
+        private void btnVolume_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnVolume.Tag.ToString() == "0")
+            {
+                var img = new BitmapImage(
+                new Uri("Images/mute.png",
+                UriKind.Relative));
+                imgVolume.Source = img;
+                btnVolume.Tag = "1";
+                sliderVolume.Value = 0;
+            }
+            else 
+            {
+                var img = new BitmapImage(
+                new Uri("Images/speaker.png",
+                UriKind.Relative));
+                imgVolume.Source = img;
+                btnVolume.Tag = "0";
+                sliderVolume.Value = 7;
+            }
+        }
     }
 }

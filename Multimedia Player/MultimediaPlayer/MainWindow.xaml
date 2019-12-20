@@ -4,8 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MultimediaPlayer"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800" MinHeight="500" MinWidth="400">
+        mc:Ignorable="d" Icon="Images/icon.png"
+        Title="Ultra Media" Height="600" Width="800" MinHeight="500" MinWidth="600">
+    <Window.Resources>
+        <!-- This style is used for buttons, to remove the WPF default 'animated' mouse over effect -->
+        <Style x:Key="NoHoverButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                            BorderThickness="0"
+                            Padding="4,2" 
+                            BorderBrush="DarkGray" 
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Black" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="80*"/>
@@ -32,23 +57,26 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <Button Name="btnPlayList" Background="Black" Click="btnPlayList_Click" Tag="0" 
-                    BorderThickness="0" Height="30" Width="30" Grid.Column="0">
+                    BorderThickness="0" Height="30" Width="30" Grid.Column="0"
+                    Style="{StaticResource NoHoverButton}">                
                 <Image Name="imgPlaylist" Source="Images/playlistoff.png"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
             </Button>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">                
                 <Button Name="btnRepeat" Background="Black" BorderThickness="0" Click="btnRepeat_Click"
-                        Tag="0" Height="20" Width="20" Margin="0,0,10,0">
+                        Tag="0" Height="20" Width="20" Margin="0,0,10,0"
+                        Style="{StaticResource NoHoverButton}">
                     <Image Name="imgRepeat" Source="Images/repeatoff.png"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 <Button Name="btnShuffle" Background="Black" BorderThickness="0" Click="btnShuffle_Click"
-                        Tag="0" Height="20" Width="20">
+                        Tag="0" Height="20" Width="20" Style="{StaticResource NoHoverButton}">
                     <Image Name="imgShuffle" Source="Images/shuffleoff.png"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 <Button Name="btnStop" Background="Black" BorderThickness="0"
-                        Height="20" Width="20" Margin="10,0,0,0" >
+                        Height="20" Width="20" Margin="10,0,0,0" 
+                        Style="{StaticResource NoHoverButton}">
                     <Image Name="imgStop" Source="Images/stop.png"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
@@ -57,17 +85,19 @@
                         VerticalAlignment="Center" HorizontalAlignment="Center">
                 
                 <Button Name="btnBack" Background="Black" BorderThickness="0"
-                        Width="35" Height="35" Margin="0,0,5,0">
+                        Width="35" Height="35" Margin="0,0,5,0"
+                        Style="{StaticResource NoHoverButton}">
                     <Image Source="Images/backward.png"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 <Button Name="btnPlay" Background="Black" BorderThickness="0"
-                        Width="50" Height="50" Margin="0,0,5,0">
+                        Width="50" Height="50" Margin="0,0,5,0"
+                        Style="{StaticResource NoHoverButton}">
                     <Image Source="Images/play.png"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 <Button Name="btnForward" Background="Black" BorderThickness="0"
-                        Width="35" Height="35">
+                        Width="35" Height="35" Style="{StaticResource NoHoverButton}">
                     <Image Source="Images/forward.png"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
@@ -77,14 +107,15 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="8*"/>
                 </Grid.ColumnDefinitions>
-                <Button Name="btnVolume" Grid.Column="0" Background="Black"
-                        BorderThickness="0" Height="20" Width="20" Margin="0,0,10,0">
+                <Button Name="btnVolume" Grid.Column="0" Background="Black" Tag="0"
+                        BorderThickness="0" Height="20" Width="20" Margin="0,0,10,0"
+                        Style="{StaticResource NoHoverButton}" Click="btnVolume_Click"> 
                     <Image Name="imgVolume" Source="Images/speaker.png"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 <Slider Name="sliderVolume" Grid.Column="1" VerticalAlignment="Center"
                         Margin="0,0,20,0" Opacity="0.5" MaxWidth="100" MinWidth="100"
-                        Value="100" />
+                        Value="10" />
             </Grid>
         </Grid>
     </Grid>

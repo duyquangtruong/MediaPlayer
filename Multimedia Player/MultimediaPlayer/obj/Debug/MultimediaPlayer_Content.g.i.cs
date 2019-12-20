@@ -8,13 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/playlist.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/playlistoff.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/repeat.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/repeatoff.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/repeatone.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/shuffle.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/shuffleoff.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/stop.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/icon.png")]
 
 
