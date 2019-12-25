@@ -180,7 +180,7 @@
                 </Button>
                 <Slider Name="sliderVolume" Grid.Column="1" VerticalAlignment="Center"
                         Margin="0,0,20,0" Opacity="0.5" MaxWidth="100" MinWidth="100"
-                        Value="10" />
+                        Value="10" ValueChanged="sliderVolume_ValueChanged" />
             </Grid>
         </Grid>
     </Grid>

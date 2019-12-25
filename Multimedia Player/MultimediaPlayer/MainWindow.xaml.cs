@@ -128,6 +128,7 @@ namespace MultimediaPlayer
                 imgVolume.Source = img;
                 btnVolume.Tag = "1";
                 sliderVolume.Value = 0;
+                mediaPlayer.Volume = 0;
             }
             else 
             {
@@ -137,6 +138,7 @@ namespace MultimediaPlayer
                 imgVolume.Source = img;
                 btnVolume.Tag = "0";
                 sliderVolume.Value = 7;
+                mediaPlayer.Volume = 7;
             }
         }
 
@@ -231,6 +233,31 @@ namespace MultimediaPlayer
                 UriKind.Relative));
             imgPlay.Source = img;
             btnPlay.Tag = "0";            
+        }
+
+        private void sliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            mediaPlayer.Volume = e.NewValue;
+
+            if (e.NewValue == 0)
+            {
+                var img = new BitmapImage(
+                new Uri("Images/mute.png",
+                UriKind.Relative));
+                imgVolume.Source = img;
+                btnVolume.Tag = "1";
+            }
+            else
+            {
+                if (btnVolume.Tag.ToString() == "1")
+                {
+                    var img = new BitmapImage(
+                    new Uri("Images/speaker.png",
+                    UriKind.Relative));
+                    imgVolume.Source = img;
+                    btnVolume.Tag = "0";
+                }
+            }
         }
     }
 }
