@@ -108,7 +108,11 @@
                 <ColumnDefinition Width="7*"/>
                 <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
-            <Slider Name="timeSlider" Opacity="0.5" Grid.Column="1" VerticalAlignment="Center"/>
+            <TextBlock x:Name="timeCurrent" Grid.Column="0" Text="0:00" Foreground="White"
+                       HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,2"/>
+            <Slider Name="timeSlider" Opacity="0.5" Grid.Column="1" VerticalAlignment="Bottom"/>
+            <TextBlock Name="timeEnd" Grid.Column="2" Text="3:20" Foreground="White" 
+                       HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,2"/>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
