@@ -44,7 +44,7 @@ namespace MultimediaPlayer
         }
 
         ObservableCollection<Song> songList;
-        TimeSpan position;
+       
 
         private void btnPlayList_Click(object sender, RoutedEventArgs e)
         {
@@ -151,9 +151,9 @@ namespace MultimediaPlayer
                 UriKind.Relative));
                 imgPlay.Source = img;
                 btnPlay.Tag = "1";
-                if (position.TotalMilliseconds == 0)
+                if (mediaPlayer.Position.TotalMilliseconds == 0)
                 {
-                    Play(position);
+                    Play();
                 }
                 else {
                     mediaPlayer.LoadedBehavior = MediaState.Play;
@@ -165,20 +165,24 @@ namespace MultimediaPlayer
                 new Uri("Images/play.png",
                 UriKind.Relative));
                 imgPlay.Source = img;
-                btnPlay.Tag = "0";
-                position = mediaPlayer.Position;
+                btnPlay.Tag = "0";                
                 mediaPlayer.LoadedBehavior = MediaState.Pause;
             }
         }
 
-        private void Play(TimeSpan position)
+        private void Play()
         {
             try
             {
                 Song selectedSong = lvPlayList.SelectedItem as Song;
                 mediaPlayer.Source = new Uri(selectedSong.SongDir);
-                mediaPlayer.Position = position;
-                mediaPlayer.LoadedBehavior = MediaState.Play;
+                mediaPlayer.Play();
+                
+                while (mediaPlayer.NaturalDuration.HasTimeSpan == false)
+                {
+                    continue;
+                }
+                timeEnd.Text = mediaPlayer.NaturalDuration.TimeSpan.;
             }
             catch (Exception e)
             {
@@ -232,7 +236,7 @@ namespace MultimediaPlayer
                 new Uri("Images/play.png",
                 UriKind.Relative));
             imgPlay.Source = img;
-            btnPlay.Tag = "0";            
+            btnPlay.Tag = "0";
         }
 
         private void sliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
