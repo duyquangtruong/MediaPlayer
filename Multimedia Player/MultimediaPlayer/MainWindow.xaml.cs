@@ -188,7 +188,7 @@ namespace MultimediaPlayer
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = true;
-            openFileDialog.Filter = "Audio files (*.mp3,*.wav,*.m4a)|*.mp3;*.wav;*.m4a| Video files (*.mp4,*.avi,*.mov,*.3gp)|*.mp4;*.avi;*.mov;*.3gp";
+            openFileDialog.Filter = "All media files |*.mp3;*.wav;*.m4a;*.mp4;*.avi;*.mov;*.3gp| Audio files (*.mp3,*.wav,*.m4a)|*.mp3;*.wav;*.m4a| Video files (*.mp4,*.avi,*.mov,*.3gp)|*.mp4;*.avi;*.mov;*.3gp";
             if (openFileDialog.ShowDialog() == true)
             {
                 for (int i = 0; i < openFileDialog.FileNames.Length; i++)
@@ -225,7 +225,12 @@ namespace MultimediaPlayer
 
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
-            mediaPlayer.Stop();
+            mediaPlayer.LoadedBehavior = MediaState.Stop;
+            var img = new BitmapImage(
+                new Uri("Images/play.png",
+                UriKind.Relative));
+            imgPlay.Source = img;
+            btnPlay.Tag = "0";            
         }
     }
 }
