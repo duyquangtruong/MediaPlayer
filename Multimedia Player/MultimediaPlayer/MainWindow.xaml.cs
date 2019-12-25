@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
+using Microsoft.Win32;
+using Microsoft.VisualBasic;
 
 namespace MultimediaPlayer
 {
@@ -24,7 +28,19 @@ namespace MultimediaPlayer
         {
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            songList = new List<Song>();
         }
+
+        class Song
+        {
+            private string songName;
+            private string songDir;
+
+            public string SongName { get => songName; set => songName = value; }
+            public string SongDir { get => songDir; set => songDir = value; }
+        }
+
+        List<Song> songList;
 
         private void btnPlayList_Click(object sender, RoutedEventArgs e)
         {
@@ -35,6 +51,8 @@ namespace MultimediaPlayer
                 UriKind.Relative));
                 imgPlaylist.Source = img;
                 btnPlayList.Tag = "1";
+                GridLength g2 = new GridLength(4, GridUnitType.Star);
+                PlayList.Width = g2;
             }
             else
             {
@@ -43,6 +61,8 @@ namespace MultimediaPlayer
                 UriKind.Relative));
                 imgPlaylist.Source = img;
                 btnPlayList.Tag = "0";
+                GridLength g2 = new GridLength(0, GridUnitType.Star);
+                PlayList.Width = g2;
             }            
         }
 
@@ -134,6 +154,29 @@ namespace MultimediaPlayer
                 imgPlay.Source = img;
                 btnPlay.Tag = "0";
             }
+        }
+        
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
+            openFileDialog.Filter = "Audio files (*.mp3,*.wav,*.m4a)|*.mp3;*.wav;*.m4a| Video files (*.mp4,*.avi,*.mov,*.3gp)|*.mp4;*.avi;*.mov;*.3gp";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                for (int i = 0; i < openFileDialog.FileNames.Length; i++)
+                {
+                    Song newSong = new Song();
+                    newSong.SongName = openFileDialog.SafeFileNames[i];
+                    newSong.SongDir = openFileDialog.FileNames[i];
+                    songList.Add(newSong);
+                }
+                lvPlayList.ItemsSource = songList;
+            }
+        }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

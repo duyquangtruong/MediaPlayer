@@ -30,6 +30,22 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="GridViewColumnHeaderStyle1" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                        <Border BorderThickness="0,0,0,1" BorderBrush="Black" Background="Transparent">
+                            <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="5,5,5,0" Width="{TemplateBinding Width}" TextAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+       
     </Window.Resources>
     <Grid Background="Black">
         <Grid.RowDefinitions>
@@ -40,7 +56,51 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <MediaElement Name="mediaPlayer" Grid.Row="0" Margin="30"/>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="PlayList" Width="4*"/>
+                <ColumnDefinition x:Name="Screen" Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <MediaElement Name="mediaPlayer" Grid.Column="1" Margin="30"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="9*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Button Name="btnAdd" Content="Add" Click="btnAdd_Click"/>
+                    <Button Name="btnRemove" Content="Remove" Click="btnRemove_Click"/>
+                    <Button Name="btnSave" Content="Save"/>
+                    <Button Name="btmLoad" Content="Load"/>
+                </StackPanel>
+                <ListView Name="lvPlayList" Background="Black" Foreground="White"
+                          Grid.Row="1" Margin="0,10,0,28" SelectionMode="Single">                    
+                    <ListView.ItemContainerStyle>                        
+                        <Style TargetType="ListViewItem">     
+                            <Style.Triggers>                                
+                                <Trigger Property="IsMouseOver" Value="True">                                
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="BorderBrush" Value="Transparent" />                                    
+                                    <Setter Property="BorderThickness" Value="1" />
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                    <Setter Property="BorderThickness" Value="0.5"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle1}">
+                            <GridView.Columns>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding SongName}"/>
+                            </GridView.Columns>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*"/>
