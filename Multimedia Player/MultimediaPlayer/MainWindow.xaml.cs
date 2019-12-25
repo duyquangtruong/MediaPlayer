@@ -44,6 +44,7 @@ namespace MultimediaPlayer
         }
 
         ObservableCollection<Song> songList;
+        TimeSpan position;
 
         private void btnPlayList_Click(object sender, RoutedEventArgs e)
         {
@@ -148,6 +149,13 @@ namespace MultimediaPlayer
                 UriKind.Relative));
                 imgPlay.Source = img;
                 btnPlay.Tag = "1";
+                if (position.TotalMilliseconds == 0)
+                {
+                    Play(position);
+                }
+                else {
+                    mediaPlayer.LoadedBehavior = MediaState.Play;
+                }
             }
             else 
             {
@@ -156,9 +164,26 @@ namespace MultimediaPlayer
                 UriKind.Relative));
                 imgPlay.Source = img;
                 btnPlay.Tag = "0";
+                position = mediaPlayer.Position;
+                mediaPlayer.LoadedBehavior = MediaState.Pause;
             }
         }
-        
+
+        private void Play(TimeSpan position)
+        {
+            try
+            {
+                Song selectedSong = lvPlayList.SelectedItem as Song;
+                mediaPlayer.Source = new Uri(selectedSong.SongDir);
+                mediaPlayer.Position = position;
+                mediaPlayer.LoadedBehavior = MediaState.Play;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+        }
+
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -196,6 +221,11 @@ namespace MultimediaPlayer
                 }
             }
             
+        }
+
+        private void btnStop_Click(object sender, RoutedEventArgs e)
+        {
+            mediaPlayer.Stop();
         }
     }
 }

@@ -58,10 +58,11 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="PlayList" Width="4*"/>
+                <ColumnDefinition x:Name="PlayList" Width="0*"/>
                 <ColumnDefinition x:Name="Screen" Width="6*"/>
             </Grid.ColumnDefinitions>
-            <MediaElement Name="mediaPlayer" Grid.Column="1" Margin="30"/>
+            <MediaElement Name="mediaPlayer" LoadedBehavior="Manual" UnloadedBehavior="Manual" 
+                          Grid.Column="1" Margin="30"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
@@ -136,7 +137,7 @@
                 </Button>
                 <Button Name="btnStop" Background="Black" BorderThickness="0"
                         Height="30" Width="30" Margin="10,0,0,0" 
-                        Style="{StaticResource NoHoverButton}">
+                        Style="{StaticResource NoHoverButton}" Click="btnStop_Click">
                     <Image Name="imgStop" Source="Images/stop.png"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
