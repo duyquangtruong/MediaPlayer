@@ -16,6 +16,9 @@ using System.Windows.Shapes;
 using System.Data.SqlClient;
 using Microsoft.Win32;
 using Microsoft.VisualBasic;
+using System.Data;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace MultimediaPlayer
 {
@@ -24,23 +27,23 @@ namespace MultimediaPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
+        class Song
+        {
+            string songName;
+            string songDir;
+
+            public string SongName { get; set; }
+            public string SongDir { get; set; }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            songList = new List<Song>();
+            songList = new ObservableCollection<Song>();
         }
 
-        class Song
-        {
-            private string songName;
-            private string songDir;
-
-            public string SongName { get => songName; set => songName = value; }
-            public string SongDir { get => songDir; set => songDir = value; }
-        }
-
-        List<Song> songList;
+        ObservableCollection<Song> songList;
 
         private void btnPlayList_Click(object sender, RoutedEventArgs e)
         {
@@ -176,7 +179,23 @@ namespace MultimediaPlayer
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
+            if (lvPlayList.SelectedItem == null)
+            {
+                return;
+            }
 
+            var selectedSong = lvPlayList.SelectedItem as Song;
+            string deletedSong = selectedSong.SongName;
+
+            for(int i=0;i<songList.Count;i++)
+            {
+                if (songList[i].SongName == deletedSong)
+                {
+                    songList.RemoveAt(i);                    
+                    break;
+                }
+            }
+            
         }
     }
 }
