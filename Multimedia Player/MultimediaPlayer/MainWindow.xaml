@@ -62,7 +62,8 @@
                 <ColumnDefinition x:Name="Screen" Width="6*"/>
             </Grid.ColumnDefinitions>
             <MediaElement Name="mediaPlayer" LoadedBehavior="Manual" UnloadedBehavior="Manual" 
-                          Grid.Column="1" Margin="0,10,0,0"/>
+                          Grid.Column="1" Margin="0,10,0,0" 
+                          MediaOpened="mediaPlayer_MediaOpened" MediaEnded="mediaPlayer_MediaEnded"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
@@ -110,7 +111,9 @@
             </Grid.ColumnDefinitions>
             <TextBlock x:Name="timeCurrent" Grid.Column="0" Text="0:00" Foreground="White"
                        HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,2"/>
-            <Slider Name="timeSlider" Opacity="0.5" Grid.Column="1" VerticalAlignment="Bottom"/>
+            <Slider Name="timeSlider" Opacity="0.5" Grid.Column="1" VerticalAlignment="Bottom"                    
+                    ValueChanged="timeSlider_ValueChanged" Maximum="1" 
+                    Margin="0,0,0,-6" LargeChange="0.1" TickFrequency="0.1" SmallChange="0.01"/>
             <TextBlock Name="timeEnd" Grid.Column="2" Text="3:20" Foreground="White" 
                        HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,2"/>
         </Grid>

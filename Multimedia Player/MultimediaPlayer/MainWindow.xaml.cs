@@ -19,6 +19,7 @@ using Microsoft.VisualBasic;
 using System.Data;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Windows.Threading;
 
 namespace MultimediaPlayer
 {
@@ -44,6 +45,8 @@ namespace MultimediaPlayer
         }
 
         ObservableCollection<Song> songList;
+        TimeSpan TotalTime;
+        DispatcherTimer mediaTimer;
        
 
         private void btnPlayList_Click(object sender, RoutedEventArgs e)
@@ -153,7 +156,7 @@ namespace MultimediaPlayer
                 btnPlay.Tag = "1";
                 if (mediaPlayer.Position.TotalMilliseconds == 0)
                 {
-                    Play();
+                    PlayMedia();
                 }
                 else {
                     mediaPlayer.LoadedBehavior = MediaState.Play;
@@ -170,23 +173,29 @@ namespace MultimediaPlayer
             }
         }
 
-        private void Play()
+        private void PlayMedia()
         {
             try
             {
                 Song selectedSong = lvPlayList.SelectedItem as Song;
                 mediaPlayer.Source = new Uri(selectedSong.SongDir);
-                mediaPlayer.Play();
+                mediaPlayer.LoadedBehavior = MediaState.Play;
                 
                 while (mediaPlayer.NaturalDuration.HasTimeSpan == false)
                 {
                     continue;
                 }
-                timeEnd.Text = mediaPlayer.NaturalDuration.TimeSpan.;
+                timeEnd.Text = mediaPlayer.NaturalDuration.TimeSpan.ToString();
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString());
+                MessageBox.Show("Choose a song in playlist to play");
+                var img = new BitmapImage(
+                new Uri("Images/play.png",
+                UriKind.Relative));
+                imgPlay.Source = img;
+                btnPlay.Tag = "0";
+                mediaPlayer.LoadedBehavior = MediaState.Stop;
             }
         }
 
@@ -231,6 +240,11 @@ namespace MultimediaPlayer
 
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
+            StopMedia();
+        }
+
+        private void StopMedia()
+        {
             mediaPlayer.LoadedBehavior = MediaState.Stop;
             var img = new BitmapImage(
                 new Uri("Images/play.png",
@@ -241,7 +255,7 @@ namespace MultimediaPlayer
 
         private void sliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            mediaPlayer.Volume = e.NewValue;
+            mediaPlayer.Volume = e.NewValue/10;
 
             if (e.NewValue == 0)
             {
@@ -261,6 +275,51 @@ namespace MultimediaPlayer
                     imgVolume.Source = img;
                     btnVolume.Tag = "0";
                 }
+            }
+        }
+
+        private void mediaPlayer_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            mediaTimer.Stop();
+            StopMedia();
+            timeSlider.Value = 0;
+        }
+
+        private void mediaPlayer_MediaOpened(object sender, RoutedEventArgs e)
+        {
+            TotalTime = mediaPlayer.NaturalDuration.TimeSpan;
+
+            // Create a timer that will update the counters and the time slider
+            mediaTimer = new DispatcherTimer();
+            mediaTimer.Interval = TimeSpan.FromMilliseconds(1000);
+            mediaTimer.Tick += new EventHandler(timer_Tick);
+            mediaTimer.Start();
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            if (mediaPlayer.NaturalDuration.TimeSpan.TotalMilliseconds > 0)
+            {
+                if (TotalTime.TotalMilliseconds > 0)
+                {
+                    timeSlider.Value = mediaPlayer.Position.TotalMilliseconds / TotalTime.TotalMilliseconds;
+                }
+            }
+        }
+
+       /* private void timeSlider_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (TotalTime.TotalMilliseconds > 0)
+            {
+                mediaPlayer.Position = TimeSpan.FromMilliseconds(timeSlider.Value * TotalTime.TotalMilliseconds);
+            }
+        }*/
+
+        private void timeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (TotalTime.TotalMilliseconds > 0)
+            {
+                mediaPlayer.Position = TimeSpan.FromMilliseconds(timeSlider.Value * TotalTime.TotalMilliseconds);
             }
         }
     }
