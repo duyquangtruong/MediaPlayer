@@ -413,6 +413,11 @@ namespace MultimediaPlayer
             if (btnRepeat.Tag.ToString() == "2")
             {
                 mediaPlayer.LoadedBehavior = MediaState.Play;
+                var img = new BitmapImage(
+                new Uri("Images/pause.png",
+                UriKind.Relative));
+                imgPlay.Source = img;
+                btnPlay.Tag = "1";
             }
         }
 
