@@ -44,10 +44,41 @@ namespace MultimediaPlayer
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             songList = new ObservableCollection<Song>();
-            backupList = new ObservableCollection<Song>();
+            backupList = new ObservableCollection<Song>();            
             random = new Random();
             _hook = Hook.GlobalEvents();
             _hook.KeyUp += KeyUp_hook;
+            
+        }
+
+        private void LoadLastList()
+        {
+            try
+            {
+                using (StreamReader sr = new StreamReader("LastList.txt"))
+                {
+                    string dir;
+                    dir = sr.ReadLine();
+                    if (dir != "0")
+                    {
+                        mediaPlayer.Source = new Uri(dir);
+                    }
+                 
+                    while ((dir = sr.ReadLine()) != null)
+                    {
+                        Song newSong = new Song();
+                        newSong.SongDir = dir;
+                        newSong.SongName = System.IO.Path.GetFileNameWithoutExtension(dir);
+                        songList.Add(newSong);
+                        backupList.Add(newSong);
+                    }
+                    lvPlayList.ItemsSource = songList;
+                }
+            }
+            catch
+            {
+                return;
+            }
         }
 
         ObservableCollection<Song> songList;
@@ -142,7 +173,9 @@ namespace MultimediaPlayer
                 UriKind.Relative));
                 imgShuffle.Source = img;
                 btnShuffle.Tag = "0";
-                lvPlayList.ItemsSource = backupList;
+                songList.Clear();
+                songList = new ObservableCollection<Song>(backupList);
+                lvPlayList.ItemsSource = songList;
             }
         }
 
@@ -215,7 +248,7 @@ namespace MultimediaPlayer
 
                 timeCurrent.Text = "0:00";
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 System.Windows.MessageBox.Show("Choose a song in playlist to play");
                 StopMedia();
@@ -408,7 +441,7 @@ namespace MultimediaPlayer
 
                 timeCurrent.Text = "0:00";
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 System.Windows.MessageBox.Show("Cannot find the song");
                 StopMedia();
@@ -599,6 +632,8 @@ namespace MultimediaPlayer
                         songList.Add(newSong);
                     }
                 }
+                backupList.Clear();
+                backupList = new ObservableCollection<Song>(songList);
             }
             catch (Exception ex)
             {
@@ -651,9 +686,31 @@ namespace MultimediaPlayer
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
+
             _hook .KeyUp -= KeyUp_hook;
             _hook.Dispose();
+
+            using (StreamWriter streamWriter = new StreamWriter("LastList.txt"))
+            {
+                if (mediaPlayer.LoadedBehavior.ToString() == "stop")
+                {
+                    streamWriter.WriteLine("0");
+                }
+                else
+                {
+                    streamWriter.WriteLine(mediaPlayer.Source.OriginalString);
+                }
+
+                foreach (var song in songList)
+                {
+                    streamWriter.WriteLine(song.SongDir);
+                }
+            }
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadLastList();
+        }
     }
 }
