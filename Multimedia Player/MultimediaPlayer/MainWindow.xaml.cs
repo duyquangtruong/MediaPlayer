@@ -717,5 +717,22 @@ namespace MultimediaPlayer
         {
             LoadLastList();
         }
+
+        private void btnClearAll_Click(object sender, RoutedEventArgs e)
+        {
+            songList.Clear();
+            backupList.Clear();
+            lvPlayList.ItemsSource = songList;
+        }
+
+        private void lvPlayList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var img = new BitmapImage(
+               new Uri("Images/pause.png",
+               UriKind.Relative));
+            imgPlay.Source = img;
+            btnPlay.Tag = "1";
+            PlayMedia();
+        }
     }
 }
