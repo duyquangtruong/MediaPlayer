@@ -45,7 +45,7 @@
             <Setter Property="FontFamily" Value="Segoe UI" />
             <Setter Property="FontSize" Value="12" />
         </Style>
-       
+
     </Window.Resources>
     <Grid Background="Black">
         <Grid.RowDefinitions>
@@ -61,28 +61,41 @@
                 <ColumnDefinition x:Name="PlayList" Width="0*"/>
                 <ColumnDefinition x:Name="Screen" Width="6*"/>
             </Grid.ColumnDefinitions>
-            <MediaElement Name="mediaPlayer" LoadedBehavior="Manual" UnloadedBehavior="Manual" 
-                          Grid.Column="1" Margin="0,10,0,0" 
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="videoFrame" Width="*"/>
+                    <ColumnDefinition x:Name="musicFrame" Width="0*"/>
+                </Grid.ColumnDefinitions>
+                <MediaElement Name="mediaPlayer" LoadedBehavior="Manual" UnloadedBehavior="Manual" 
+                           Margin="0,10,0,0" Grid.Column="0"
                           MediaOpened="mediaPlayer_MediaOpened" MediaEnded="mediaPlayer_MediaEnded"/>
+                <Image Name="musicBackground" RenderOptions.BitmapScalingMode="HighQuality" Grid.Column="1"/>
+            </Grid>
+            
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="9*"/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                    <Button Name="btnAdd" Content="Add" Click="btnAdd_Click"/>
-                    <Button Name="btnRemove" Content="Remove" Click="btnRemove_Click"/>
-                    <Button Name="btnSave" Content="Save"/>
-                    <Button Name="btmLoad" Content="Load"/>
+                <StackPanel Grid.Row="0" Orientation="Horizontal"
+                            VerticalAlignment="Center">
+                    <Button Name="btnAdd" Content="Add" Click="btnAdd_Click" 
+                            Height="40" Width="40" Margin="5,0,0,0"/>
+                    <Button Name="btnRemove" Content="Remove" Click="btnRemove_Click"
+                            Height="40" Width="40" Margin="5,0,0,0"/>
+                    <Button Name="btnSave" Content="Save" Height="40" Width="40"
+                            Margin="5,0,0,0" Click="btnSave_Click"/>
+                    <Button Name="btnLoad" Content="Load" Height="40" Width="40"
+                            Margin="5,0,0,0" Click="btnLoad_Click"/>
                 </StackPanel>
                 <ListView Name="lvPlayList" Background="Black" Foreground="White"
-                          Grid.Row="1" Margin="0,10,0,28" SelectionMode="Single">                    
-                    <ListView.ItemContainerStyle>                        
-                        <Style TargetType="ListViewItem">     
-                            <Style.Triggers>                                
-                                <Trigger Property="IsMouseOver" Value="True">                                
+                          Grid.Row="1" Margin="0,10,0,28" SelectionMode="Single">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Background" Value="Transparent" />
-                                    <Setter Property="BorderBrush" Value="Transparent" />                                    
+                                    <Setter Property="BorderBrush" Value="Transparent" />
                                     <Setter Property="BorderThickness" Value="1" />
                                 </Trigger>
                                 <Trigger Property="IsSelected" Value="True">
@@ -111,26 +124,27 @@
             </Grid.ColumnDefinitions>
             <TextBlock x:Name="timeCurrent" Grid.Column="0" Text="0:00" Foreground="White"
                        HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,2"/>
-            <Slider Name="timeSlider" Opacity="0.5" Grid.Column="1" VerticalAlignment="Bottom"                    
+            <Slider Name="timeSlider" Opacity="0.5" Grid.Column="1" VerticalAlignment="Center"                    
                     ValueChanged="timeSlider_ValueChanged" Maximum="1" 
-                    Margin="0,0,0,-6" LargeChange="0.1" TickFrequency="0.1" SmallChange="0.01"/>
+                    Margin="0,0,0,-6" LargeChange="0.05" TickFrequency="0.1" SmallChange="0.01"/>
             <TextBlock Name="timeEnd" Grid.Column="2" Text="3:20" Foreground="White" 
                        HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,2"/>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="99*"/>
+                <ColumnDefinition Width="198*"/>
+                <ColumnDefinition Width="198*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="198*"/>
             </Grid.ColumnDefinitions>
             <Button Name="btnPlayList" Background="Black" Click="btnPlayList_Click" Tag="0" 
                     BorderThickness="0" Height="30" Width="30" Grid.Column="0"
-                    Style="{StaticResource NoHoverButton}">                
+                    Style="{StaticResource NoHoverButton}" Margin="34,22,35,22">
                 <Image Name="imgPlaylist" Source="Images/playlistoff.png"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
             </Button>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">                
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
                 <Button Name="btnRepeat" Background="Black" BorderThickness="0" Click="btnRepeat_Click"
                         Tag="0" Height="20" Width="20" Margin="0,0,10,0"
                         Style="{StaticResource NoHoverButton}">
@@ -150,8 +164,8 @@
                 </Button>
             </StackPanel>
             <StackPanel Name="controlButton" Orientation="Horizontal" Grid.Column="2" 
-                        VerticalAlignment="Center" HorizontalAlignment="Center">
-                
+                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="27,7">
+
                 <Button Name="btnBack" Background="Black" BorderThickness="0"
                         Width="35" Height="35" Margin="0,0,5,0"
                         Style="{StaticResource NoHoverButton}">
@@ -165,19 +179,20 @@
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
                 <Button Name="btnForward" Background="Black" BorderThickness="0"
-                        Width="35" Height="35" Style="{StaticResource NoHoverButton}">
+                        Width="35" Height="35" Style="{StaticResource NoHoverButton}"
+                        Click="btnForward_Click">
                     <Image Source="Images/forward.png"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
             </StackPanel>
-            <Grid Grid.Column="3" HorizontalAlignment="Left">
+            <Grid Grid.Column="3" HorizontalAlignment="Left" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="8*"/>
                 </Grid.ColumnDefinitions>
                 <Button Name="btnVolume" Grid.Column="0" Background="Black" Tag="0"
                         BorderThickness="0" Height="20" Width="20" Margin="0,0,10,0"
-                        Style="{StaticResource NoHoverButton}" Click="btnVolume_Click"> 
+                        Style="{StaticResource NoHoverButton}" Click="btnVolume_Click">
                     <Image Name="imgVolume" Source="Images/speaker.png"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button>
