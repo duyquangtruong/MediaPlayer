@@ -20,6 +20,8 @@ using System.Data;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
+using System.Windows.Forms;
+using Gma.System.MouseKeyHook;
 
 namespace MultimediaPlayer
 {
@@ -44,6 +46,8 @@ namespace MultimediaPlayer
             songList = new ObservableCollection<Song>();
             backupList = new ObservableCollection<Song>();
             random = new Random();
+            _hook = Hook.GlobalEvents();
+            _hook.KeyUp += KeyUp_hook;
         }
 
         ObservableCollection<Song> songList;
@@ -52,6 +56,7 @@ namespace MultimediaPlayer
         TimeSpan TotalTime;
         DispatcherTimer mediaTimer;
         Random random;
+        private IKeyboardMouseEvents _hook;
 
         public int RNG(int previousNumber, int limit)
         {
@@ -212,7 +217,7 @@ namespace MultimediaPlayer
             }
             catch (Exception e)
             {
-                MessageBox.Show("Choose a song in playlist to play");
+                System.Windows.MessageBox.Show("Choose a song in playlist to play");
                 StopMedia();
             }
         }
@@ -250,7 +255,7 @@ namespace MultimediaPlayer
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
             openFileDialog.Multiselect = true;
             openFileDialog.Filter = "All media files |*.mp3;*.wav;*.m4a;*.mp4;*.avi;*.mov;*.3gp| Audio files (*.mp3,*.wav,*.m4a)|*.mp3;*.wav;*.m4a| Video files (*.mp4,*.avi,*.mov,*.3gp)|*.mp4;*.avi;*.mov;*.3gp";
             if (openFileDialog.ShowDialog() == true)
@@ -405,7 +410,7 @@ namespace MultimediaPlayer
             }
             catch (Exception e)
             {
-                MessageBox.Show("Cannot find the song");
+                System.Windows.MessageBox.Show("Cannot find the song");
                 StopMedia();
             }
         }
@@ -503,6 +508,34 @@ namespace MultimediaPlayer
             }
         }
 
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            PlayPrevious();
+        }
+
+        private void PlayPrevious()
+        {
+            int index = 0;
+
+            for (int i = 0; i < songList.Count; i++)
+            {
+                if (songList[i].SongName == currentSong.SongName)
+                {
+                    index = i;
+                    break;
+                }
+            }
+
+            //neu dau playlist thi phat bai hat cuoi
+            if (index == 0)
+            {
+                index = songList.Count;
+            }
+
+            //tang index choi bai truoc
+            PlayIndex(index - 1); ;
+        }
+
         private void btnForward_Click(object sender, RoutedEventArgs e)
         {
             PlayNext();
@@ -542,11 +575,11 @@ namespace MultimediaPlayer
                         streamWriter.WriteLine(song.SongDir);
                     }
                 }
-                MessageBox.Show("Saved");
+                System.Windows.MessageBox.Show("Saved");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Cannot save playlist");
+                System.Windows.MessageBox.Show("Cannot save playlist");
             }
         }
 
@@ -569,9 +602,58 @@ namespace MultimediaPlayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Cannot load playlist");
+                System.Windows.MessageBox.Show("Cannot load playlist");
                 songList = new ObservableCollection<Song>(backupList);
             }
         }
+
+        private void KeyUp_hook(object sender, System.Windows.Forms.KeyEventArgs e)
+        {         
+            if (e.Control && e.Shift && (e.KeyCode == Keys.P))
+            {
+                if (btnPlay.Tag.ToString() == "0")
+                {
+                    var img = new BitmapImage(
+                    new Uri("Images/pause.png",
+                    UriKind.Relative));
+                    imgPlay.Source = img;
+                    btnPlay.Tag = "1";
+                    if (mediaPlayer.Position.TotalMilliseconds == 0)
+                    {
+                        PlayMedia();
+                    }
+                    else
+                    {
+                        mediaPlayer.LoadedBehavior = MediaState.Play;
+                    }
+                }
+                else
+                {
+                    var img = new BitmapImage(
+                    new Uri("Images/play.png",
+                    UriKind.Relative));
+                    imgPlay.Source = img;
+                    btnPlay.Tag = "0";
+                    mediaPlayer.LoadedBehavior = MediaState.Pause;
+                }
+            }
+
+            if (e.Control && e.Shift && (e.KeyCode == Keys.N))
+            {
+                PlayNext();
+            }
+
+            if (e.Control && e.Shift && (e.KeyCode == Keys.B))
+            {
+                PlayPrevious();
+            }
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            _hook .KeyUp -= KeyUp_hook;
+            _hook.Dispose();
+        }
+
     }
 }
