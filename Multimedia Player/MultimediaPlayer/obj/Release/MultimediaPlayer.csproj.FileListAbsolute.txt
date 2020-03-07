@@ -1,0 +1,16 @@
+C:\Users\DELL\Documents\GitHub\MediaPlayer\Multimedia Player\MultimediaPlayer\bin\Release\MultimediaPlayer.exe.config
+C:\Users\DELL\Documents\GitHub\MediaPlayer\Multimedia Player\MultimediaPlayer\bin\Release\MultimediaPlayer.exe
+C:\Users\DELL\Documents\GitHub\MediaPlayer\Multimedia Player\MultimediaPlayer\bin\Release\MultimediaPlayer.pdb
+C:\Users\DELL\Documents\GitHub\MediaPlayer\Multimedia Player\MultimediaPlayer\bin\Release\Gma.System.MouseKeyHook.dll
+C:\Users\DELL\Documents\GitHub\MediaPlayer\Multimedia Player\MultimediaPlayer\obj\Release\MultimediaPlayer.csprojAssemblyReference.cache
+C:\Users\DELL\Documents\GitHub\MediaPlayer\Multimedia Player\MultimediaPlayer\obj\Release\MainWindow.g.cs
+C:\Users\DELL\Documents\GitHub\MediaPlayer\Multimedia Player\MultimediaPlayer\obj\Release\App.g.cs
+C:\Users\DELL\Documents\GitHub\MediaPlayer\Multimedia Player\MultimediaPlayer\obj\Release\MultimediaPlayer_MarkupCompile.cache
+C:\Users\DELL\Documents\GitHub\MediaPlayer\Multimedia Player\MultimediaPlayer\obj\Release\MultimediaPlayer_MarkupCompile.lref
+C:\Users\DELL\Documents\GitHub\MediaPlayer\Multimedia Player\MultimediaPlayer\obj\Release\MainWindow.baml
+C:\Users\DELL\Documents\GitHub\MediaPlayer\Multimedia Player\MultimediaPlayer\obj\Release\MultimediaPlayer.g.resources
+C:\Users\DELL\Documents\GitHub\MediaPlayer\Multimedia Player\MultimediaPlayer\obj\Release\MultimediaPlayer.Properties.Resources.resources
+C:\Users\DELL\Documents\GitHub\MediaPlayer\Multimedia Player\MultimediaPlayer\obj\Release\MultimediaPlayer.csproj.GenerateResource.cache
+C:\Users\DELL\Documents\GitHub\MediaPlayer\Multimedia Player\MultimediaPlayer\obj\Release\MultimediaPlayer.csproj.CopyComplete
+C:\Users\DELL\Documents\GitHub\MediaPlayer\Multimedia Player\MultimediaPlayer\obj\Release\MultimediaPlayer.exe
+C:\Users\DELL\Documents\GitHub\MediaPlayer\Multimedia Player\MultimediaPlayer\obj\Release\MultimediaPlayer.pdb
